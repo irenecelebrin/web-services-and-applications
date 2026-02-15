@@ -1,4 +1,4 @@
-# assignment 2: Write a program that "deals" (prints out) 5 cards, congratulate the user if the get a good hand 
+# assignment 1: Write a program that "deals" (prints out) 5 cards, congratulate the user if the get a good hand 
 # date: 2026-02-10
 # author: irene celebrin 
 
