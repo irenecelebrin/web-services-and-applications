@@ -401,3 +401,104 @@ if you make a misrakte doing it, you get a 500 error
 
 all this stuff you can do with postman, too. 
 
+
+# 3. Reading APIs in the wild 
+
+Some in the code in courseware is titled 'topic 4' because this was topic 4 last year 
+
+## 1. write a code to interact with an API + LAB 3
+
+Interacting with externatl APIs using python and requests 
+
+see github.com/psf/requests 
+
+vert powerful: sessions, cookies, keep alive, auteentications
+
+parameters: 
+
+- headers
+- data types
+- json
+
+response attributes and methods: 
+- status_code
+- text
+- json()
+- content
+- header()
+
+URL ENCODING
+
+python module: urllib.parse
+
+quote() function to turn any string into a url encodeed string 
+
+You can encode an url but also parameters
+
+EXERCISE: get data from an API 
+Best practice: create the code in functions, so that a function gets the data and a function analyses the data.
+
+See documentation for 
+
+requests.get(url) 
+requests.post(url, params) --> https://www.w3schools.com/python/ref_requests_post.asp 
+requests.put(url, params) --> to update https://www.geeksforgeeks.org/python/put-method-python-requests/ 
+requests.delete(url, params)
+
+Also in the slides 
+
+## 2. Reading data from data.gov.ie
+
+Real APis --> there is no one system, you need to find the way based on the data, reading documentation, authorizations, limits... 
+
+Consider: 
+- rate limits
+- authentication: API keys, Oauth
+- format of responses: mostly json, somethimes xml, sometimes some data is invalid/missing
+- validity of data 
+- sometimes urls change and your code won't work until you fix that 
+
+sources:
+data.gov.ie/dataset
+cso.ie (in video 3)
+
+on DATA.GOV.IE
+see national planning applications
+you can preview the data before downloading it (sometimes). 
+
+see 4.2-planning.py
+
+## 3. Reading data from CSO.ie 
+
+CSo provides data in a json format called pxtat, which is used for multidimentional data. 
+Decent module to use pxtat??
+we are looking at restAPI not Json rpc
+
+go to cso.ie/databases
+PxStat: Horrid format, a json format which allows for multidimensional data 
+documentation on cso website
+documentation: github.com/CSOIreland/PxStat/wiki/API-Cube-RESTful 
+
+Requests.get gives a huge jason with: 
+- values as an array
+- ods as array of each dimension
+- sizes (as array) of each dimension
+- dimensions (object) stores information about each dimention
+- other information and notes 
+
+ID: ids of the dimenions
+size: size if the dimentions
+value: all the data 
+labels: provide info on the number of data points for each dimension 
+
+sometimes data for each dimension is not in the same order, not everything correspondds: for example, you can have x data points for each dimension. You can remap considering all these things and embedding in a new structure 
+
+Watch video to parse pxstat in normal json!!
+
+
+
+
+
+
+
+
