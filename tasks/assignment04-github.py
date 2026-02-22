@@ -2,6 +2,7 @@
 # author: irene celebrin
 # date: 2026-02-22
 
+# code adapted from: https://chatgpt.com/share/699b4aa7-b440-800f-aa5b-b492f207969b
 # import modules 
 import requests
 from config import api_keys 
