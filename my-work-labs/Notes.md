@@ -496,6 +496,107 @@ sometimes data for each dimension is not in the same order, not everything corre
 Watch video to parse pxstat in normal json!!
 
 
+# 4. Authentication 
+## 4.1 PAPI Authentication 
+
+Some APIs want to restrict access to the data: 
+- they don't want people to modify data 
+- people to view sensititive data 
+- limit the amount of times people access data, especially if it takes a lot of processing or if there are subscriptions --> rate limits
+- you create an application that other users can interact with, without them giving you their credentials 
+
+--> simplest way to do it: API keys 
+
+Resource owner can generate the keus and share them with third parties to grant access to resources. 
+You don't put your API keys on GitHub 
+
+Instead, create a .config file and you store your data there. The config will be in the gitignore, so it won't be saved in Github
+
+You include the API key in your request: 
+- in the URL GET request
+- in tyhe header as attribute 
+
+response = requesrs.get(url, auth=('token', apikey))
+
+example: html2pdf.app 
+
+It's a free website. You can register and get your api key and add it to your code. 
+See topic 5 authentication (html2pdfdemp.py)
+ 
+
+CONFIG fil. 
+
+create a dict with the api keys and import as custom module 
+
+apikeys = {
+    'htmltopdf' = 'xxxxx'
+}
+
+
+ALSO 
+
+Github also has API and you can use it to get public or private data. 
+
+OAUTH: 
+Oauth1 and Oauth2
+lots of different cases
+2 legged --> key-authorization
+3 legged: --> there is one more step between the user and the authorization. the user makes a request to get the token and then can authenticate.  
+
+## 4.2 Guthub API
+
+From the API you can get public information (all the public repos)
+
+If you want to access a private repo, you need to authenticate yourself. You will get a key from guthub, you can use it in your request and access the data. 
+
+### Getting public information -- get list of public repositories from user
+
+- go to github docs
+- repositories / list of repositories for user 
+- copy the curl request 
+
+set the url you need and create the requests request. read the response as json. 
+Consider all necessary parameters --> n. of repositories, for example, because the default is 30 but you might want to get all of them / or more. 
+
+- get the url of the repo you are interested in, so you can get the content (contents_url) 
+
+- replace the url in your request 
+
+
+### From private repositories 
+
+see getprivaterepository.py 
+
+
+without the authorization --> returns a 404 error 
+
+- getting the api key. see documentatiopn on Rest API. 
+- Go to settings and get a *fine-grained token*. You can set the expiration and which permissions are granted. 
+If somebody has the token, they'll be able to access the repository 
+- you insert the api key in your reuqest and you'll be able to access the data 
+
+- you can't access private repos or code unless you have the authorization from the owner (in the form of a key)
+
+
+
+## 4.3 Python packages 
+
+Use python packages to make it easier to work with APIs 
+apilayer 
+rapidapi 
+apilist
+puclicapis 
+
+The documetnations will give you the list of urls and how to use them
+For very popular apis, you can just look for them without using the packages 
+
+You can also use LLMs
+- copilot a bit verbose 
+- claude 
+
+- llms still require human intervention 
+- they are very good to do basic / commons actions --> where there is a lot of knowledge about on the web because many other people have done it before.  
+
 
 
 
