@@ -598,6 +598,199 @@ You can also use LLMs
 - they are very good to do basic / commons actions --> where there is a lot of knowledge about on the web because many other people have done it before.  
 
 
+# 5. Flask 
+
+## 5.1 Virtual environments 
+
+Virtual machines: ways of storing packages and versions of python 
+
+You work on different projects, you might want to use different versions of python or code. Because your code is old and uses an older version, for example. 
+
+You cancrete a virtual environment and the code will use that environment 
+
+create a virtual env: python -m venv venv  --> nothing inside 
+make a venv with system pacKages:  python -m venv venv  --system-site-packages
+
+run a venv: .\venv\Scripts\activate.bat
+
+see packages: pip freeze 
+save them to a file: pip freeze > requirements.txt 
+
+load a file of packages: pip install -r requirements.txt 
+exit: deactivate 
+
+!! make sure the .venv in your gitignore 
+
+step bybstep 
+
+create venv
+use ls to see the venv 
+activate it 
+run a code --> impossible, the env is empty 
+install packages with install 
+pip freeze to see the packes 
+pip freeze > requirements.txt to save them in requirements.txt file 
+deactivate to get out 
+
+how to delete a virtual environment: rm -rf venv\
+
+Why using them: handy to control what packages are installed for a pj and isolate them, handy for legancy and stuff 
+
+
+## 4.2 Flask intro 
+
+Flask allows to write code to respond to hhtp requests that can be made py clients (postman, curl, python code). 
+
+There will be an app server (Flask), which takes the http request and puts together the response. 
+The app server can get static pages (html pages, files like jpeg or pdf) and serve them back to the client. 
+We can also write the code for a web server. This will look into a database or third party data on the web. 
+
+Pyton frameworks: django, flash, hug, bottle, cherryPy, Dash. 
+The principles are the same for all. 
+
+How do you write the code that will deal with the reuqests? 
+see presentation. 
+
+How to run flas? 
+1) you run the piece of code, wwhich will have the code app.run and will start flask 
+2) use the flask command. This is more used in servers. You can set different env variables (based on wether you are on the cloud or locally) 
+
+you set the variable FLASK_APP  with the name of your code and run it
+
+FLASK_APP = b_restserver (b_restserver.py is the program file)
+flask run 
+
+When you run the code, it wil show you a message and the endpoint. 
+When you stop the program, the endpoint will stop working. 
+
+You can add multiple endpoints in: 
+
+@app.route(''): 
+def blah('this is blah')
+
+if you send the request endpoint/blah you will get that response. 
+
+
+## 5.3 Falsk mapping 
+
+Flask decides if the reqtest gpes to static page or webserver that goves dynamic content. 
+
+**Static pages**
+
+ --> you se the location of the static page when creating the app 
+
+app = Flask(--name--, static_url_path = 'static pages') 
+
+--> the code will search for the folder static pages in the code directory and display the first file. 
+In the folder you can add multiple files and they will be found. 
+
+see b_server.py 
+
+**Web server**
+
+- You use the map function through @app.route 
+
+- You can set the **methods** too, defining the properties 
+
+#app.route('/users', methods = ['GET'])
+def get_users():
+    return 'this will show the users' 
+
+so the request endpoint/users will return that message 
+
+- You can take in **variables** and **types** of variable that will be accepted in the requests 
+
+This works with dynamic variable: 
+#app.route('/users/<username>', methods = ['GET'])
+def get_users():
+    return f' hello {username}' 
+
+This requires an INT in the request
+#app.route('users/<int:id>', methods = ['GET'])
+def get_users():
+    return 'this will show the users' 
+
+If you use a string instead of int, you get an error message 
+If you use a POST method insteaf og GET, you get an error 
+
+create mapping for post --> 
+
+#app.route('/users', methods = ['POST'])
+def create_users():
+    return 'create a new user' 
+
+- you can set the url for particular functions or redirect to some url from **invalid** reuqests as fallback  
+
+#app.route('/invalid', methods = ['GET'])
+def testing_redirect():
+    return redirect(url_for('index'))
+
+You need to install url_for, redirect 
+
+Takeway: You can map endpoints using app.route 
+You can use the API to do CRUD operations on users 
+
+Example: you can store data and present it in a nice way. 
+
+## 5.4 Data in Flask 
+
+see c_server.py
+
+How does Flask deal with data? 
+How does it receive the data in the request and give data back to the client? 
+
+DATA UPLOAD: 
+3 ways to upload data: 
+- in the endpoint
+- as a query parameter 
+- with the request body (you use it with post or put), in the form of json, raw... 
+
+to access request data you use the request object in Flask (differnt from requests package)
+
+- data you can get from the request object: 
+    - request.path --> /user
+    - request.method --> GET
+    - request.form --> form data
+    - json --> json data in the http request body 
+    - request.args --> arguments from the urls  
+    - request.files['fileparam'] --> an uploaded file 
+
+
+Note: make sure you terminate a server before you start a new server --> sometimes you are running an old server. 
+
+Note: you can test inbody only with POSTMAN, not on the browser 
+
+Note: you use return to return a response, print for debugging purposes 
+
+
+- Rendering templates vs JSON --> better to return json response, it's more robust 
+
+- You can return data (like dict obj) and jsonify it with AJAX on the web page
+
+In Flask try to keep the fucntions as short as possible. If they need to be more complax, create them in another file and import the module. The code with Flask is only for routing. 
+
+- aborts and redirects: from flask import abort, redirect, url_for 
+
+- More: 
+    - you can allow data to be stored between requests 
+    - flashing --> related to templates 
+    - logging --> important for debugging 
+
+see more references in moodle 
+
+LAB: restserver.py 
+
+design the database
+create skeleton api with flask 
+add functions for each endpoint and test them with curl 
+then you create a dao --> database. you integrate it with the server 
+
+
+
+
+
+
+
 
 
 
