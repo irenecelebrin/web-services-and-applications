@@ -786,8 +786,110 @@ add functions for each endpoint and test them with curl
 then you create a dao --> database. you integrate it with the server 
 
 
+# 6. Linking to databases
+
+## 6.1 Data layer 
+
+DATA LAYER: Module or data file that you create to interact with your data source (for example database)
+
+How does your API interact with the data source? 
+There will be a separate python file where you have the requests. 
+So the requests are not in the flask code. 
+
+In this way the code can be reused, and it only makes sense to separate code so at every time you know what you are dealing with. 
+
+Which are the functions your flask code will use in the dao? 
+So you define the functions in a python file, and then you call the function in the flask code. 
+You need to define which kind of data each function will return and what they will do. 
+
+See **bookDAO-skeleton.py** in the material --> this is statik, it is only giving that data as reponse. 
+you create a CLASS with all the functions 
+
+How do you use it? 
+
+in your Flask code you import the custom module: from bookDAO-skeleton import bookDAO 
+
+you can replace all the reurun objects with the functions defined in the DAO: 
+
+return jsonify(bookDAO.returnall())
+
+IMPORTANT: for create, you want to check that the data added exists and is valid. 
+
+if title not in jsonstring: 
+    abort(401)
+etc for all params
+--> you can pass in all the errors you want 
+
+now the Flask server is using the DAO. SO that code can be expanded to work with the database. 
+The data can come from an internal database or outside data. you need to understand how to interact with that data. Use it directly or save it in an internal database and then use that? 
 
 
+## 6.2 Databases 
+
+Setting up databases and WAMP 
+
+Open WAMP from right bottom corner in the bar (green W, after starting wamp)
+You can use myphp admin or jkust myysql console or workbench
+you can create databases or import them (from sql files or other formats)
+
+## 6.3 python and SQL 
+
+how to write python code to interact with a database --> you can use mysql-connector 
+
+import mysql.connector 
+after installing in your virtual environment / machine 
+
+you set up a variable with the **connector** localhost, username, password, database name...
+
+you set up a **cursor** to storing the data on your local machine 
+
+commit if you create / update / delete 
+
+close the connector. If not, you can get resource leaks and your system crashes 
+
+PREVENT SQL INJECTION 
+
+you can pass sql value in the statement as strings but that can cause people to add to that string 
+It's better to pass in variables in the statement and then set the values outside of the string 
+
+ADDING DATA TO DB
+use cursor + sql statement 
+execute 
+commit 
+close cursor
+close database
+
+GET DATA FROM THE DB
+cursor
+select statement 
+execute cursor 
+use fetchall to get the data 
+print in console or where you want 
+close everything 
+
+See in the code topic7 the code samples to create te db, tables, create data, read data, update, delete. 
+
+
+what can go wrong? 
+- if your db is not running, the code won't be able to connect with the bd 
+- if the db is not set up, 
+
+
+Then you want to put everything in s code that can be reused 
+- make a class with all the functions
+- make an instance of that class 
+import into anther file (will be flask later)
+
+see ZstudentDAO
+
+the class includes: 
+- set up db conections with connector and cursor--> the data should come from a config file 
+- insert all the functions like getall, findby id, update, delete. 
+- utily function to convert the tuples (the output at the moment is tuples of value, value, value) and return dict objects with att_name: value. 
+
+
+see zteststudenDAO
+test all the functions. you can use the testcode in the server to test, too. 
 
 
 
