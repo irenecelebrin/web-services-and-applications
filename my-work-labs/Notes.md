@@ -893,8 +893,196 @@ test all the functions. you can use the testcode in the server to test, too.
 
 
 
+# 7. Project presentation
+
+# 8. Consolidation week 
+
+# 9. HTML, Javascript and Ajax 
+
+## 9.1 Client side of a web application 
+
+Use Javascript to create the client --> interface users use to interact with the database 
+
+Ok to use AI  
+
+For this course, used GitHub copilot --> enable in Vs Studio code or use the application provided in the Office package. 
+
+1) check that the rest server works running it in the terminal and looking up the host in the browser 
+
+THE PROBLEM: 
+what you need to create is;: 
+- HTML to create the page layourt 
+- CSS for the look of the page 
+- Js for the functionsality
+- Jquery AJAX to make the API calls 
 
 
+**index.html**
+
+create cleint-side application that will interact with an API that performs CRUD operations on books. 
+Use Jquery ajax for the API calls
+put the html, css, js in separate files. 
 
 
+## 9.2 HTML
+
+The code in the hmtl code can be different from the code dispòayed from the page --> it can come from the API. 
+
+Running a file through a server is differen than runnin git through the page (openng it locally with the browser)
+
+Look at tags for: 
+- tables 
+- forms
+- buttons 
+
+
+## 9.3 CSS 
+
+- look at w3school
+- where it is 
+- how to hide stuff, block, disable 
+
+style can be defined:
+- in another file 
+- in the head 
+- in the element itself 
+
+make an element hidden 
+
+<div style='display:block'>
+    text
+</div>
+
+disable an element
+
+<input type = 'tetx' value = 'hi' disabled>
+
+see CSS syntax 
+
+SELECTORS 
+you define them and call them with the id 
+
+## 9.4 Javascript 
+
+- W3schools 
+- overview manipulation 
+- dom manipulation 
+- setting the values and innerHTML 
+
+The lab does everything the agent did in the first video 
+
+- onclick attribute --> call a funciton with click 
+
+- getElementbyID --> when the use clicks on an element, the contents opf the input will display another div 
+
+- same for getElementByTagName
+
+- you can change the style eim 
+
+- events: onclick, on ...
+
+## 9.5 AJAX 
+asynchronous 
+
+Ajax allows to call an API endpoint somewhere in the cloud
+
+an event occurs
+a requent is sent to server
+server returns an answer
+answer is displayed 
+
+Jquery for Ajax: 
+6 attributes 
+- url --> API 
+- method --> get, post, delete...
+- data --> inout data 
+- datatype --> output format (json, html..)
+- success --> function to call in case of success
+- error --> function to call in case of error 
+
+4 are strings
+last 2 are types 
+
+JQuery is a JS library 
+
+You include Jquery in your html file wity one single line 
+
+$.AJAX function: it takes on as parameter a Json object 
+
+
+# 10 Linking the project together 
+
+## 10.1 How to eat an elephant 
+
+break thinkings into pieces. Component needed for the project: 
+
+1.  Write the server.py to create teh endpoint with Flask 
+2. Bookdao to link to the databases 
+3. Create the static pages --> index.html, css, app.js 
+
+- decide which entity you will use 
+- decide which API to build (functionalities)
+- create database tables 
+- write DAO and test it (dao.py)
+- wrtie the Flask end points for the API and test them (server.py)
+- the endpoints to the DAO and test (server.py)
+- Create front end (HTML)
+- make the functionality for the front end (app.js)
+- call the api in javascropt, using AJAX (app.js)
+- make it look nice (css)
+
+## 10.2 Hosting in pythonanywhere 
+
+There are many other hosting services. --> the code needs to be hosted, it also needs more funcitonalities --> use LLM 
+
+create a free (beginner accout) 
+two types of consoles: normal and mysql 
+
+what to do: 
+make a deploy repository
+on your machine create a virtual env and test before putting on guthub 
+put on github 
+pull the code to your pythonanywhere account 
+--> durst time you clone from github 
+get it running 
+set up the database
+what is its url-hostname, username and password
+set up database and table 
+
+GET STARTED
+
+clone repository on your machine 
+open in vs code
+add your server.py
+create a virtual environment 
+test the code locally 
+push to github 
+
+on pythomanywhere --> create a new bash console 
+git clone repo with hhtps (not ssh)
+get the code runnning --> web apps - open web tab 
+set up everything (Flask as server package)
+
+reload everyhting with green button 'reload...'
+
+source code --> link to your site 
+
+access log 
+error log 
+--> all the logs to what happens in the machine 
+
+veryfy that everything (module imports, directories are correct and match )
+
+create a new database and password with the Mysql section.
+the databse will be linked to the host website (directory of the server)
+
+go again to your local machine
+change the directory when you run the server --> use the same repository 
+the database is running in the machine of python anywhere 
+
+in your local code (config file), update host username all the info savong to a new filer
+pull in pythonanywhere and replace config with the new config
+testing if it works 
+
+10 extra marks for deploying to python anywhere 
 
