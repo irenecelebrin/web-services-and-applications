@@ -16,7 +16,7 @@ REPO = "aprivateone"
 PATH = "code.py"
 
 # --- HEADERS ---
-# set authorization token and content negotioation (json, v3 of github api)
+# set authorization token and content negotiation (json, v3 of github api)
 headers = {
     "Authorization": f"token {TOKEN}",
     "Accept": "application/vnd.github.v3+json"
@@ -54,4 +54,5 @@ update_payload = {
 update_response = requests.put(url, headers=headers, json=update_payload)
 update_response.raise_for_status()
 
+# print success message
 print("File successfully updated!")
