@@ -68,5 +68,5 @@ if sorted_values[4] - sorted_values[0] == 4 and len(set(sorted_values)) == 5:
 if len(set(suits)) == 1:
     print("Congratulations! You got a flush!")
 
-#TODO: reset code so that all checks are performed at the same time
+# comment: it would have probably been better to create the code so that all checks are done in one loop. 
 
