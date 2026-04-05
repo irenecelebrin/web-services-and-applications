@@ -1,6 +1,6 @@
 # task 3: Write a program that retrieves the dataset for the "exchequer account (historical series)" from the CSO, and stores it into a file called "cso.json".
 # date: 15-02-2026
-# author: irene celebrin 
+# author: Irene Celebrin 
 
 import requests
 import json 
