@@ -2,6 +2,8 @@
 
 # import flask 
 from flask import Flask, url_for, request, jsonify, redirect, abort
+from recipe_dao import get_all, get_by_id, create, update, delete
+
 
 # create an instance of the flask class 
 app = Flask(__name__)
@@ -14,15 +16,15 @@ def index():
 
 # Get all items
 # Test: curl *host*/items 
-@app.route("/items", methods=["GET"])
-def get_items():
-    return 'All items are returned here'
+@app.route("/recipes", methods=["GET"])
+def get_all_recipes():
+    return jsonify(get_all())
 
 # Get item by id
 # Test: curl *host*/items/1
-@app.route("/items/<int:id>", methods=["GET"])
-def get_item_by_id(id):
-    return f'Item with id:{id} is returned'
+@app.route("/recipes/<int:id>", methods=["GET"])
+def get_recipe_by_id(id):
+    return jsonify(get_by_id(id))
 
 # Create new item
 # Test: curl -X POST *host*/items  
