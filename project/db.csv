@@ -1,6 +1,18 @@
-name,ingredients,how-to,fun fact,other,macros,date_added,date_modified
-Chickpea Buddha Bowl,"{""chickpeas"":""1 cup"",""quinoa"":""1 cup cooked"",""spinach"":""1 handful"",""tahini"":""2 tbsp""}","Cook quinoa, roast chickpeas, assemble with spinach and drizzle tahini.","Buddha bowls are meant to be balanced and nourishing in one dish.","High fiber meal","{""calories"":450,""protein"":18,""carbs"":55,""fat"":15}","2026-04-01 12:00:00","2026-04-01 12:00:00"
-Vegan Lentil Curry,"{""lentils"":""1 cup"",""coconut milk"":""1 can"",""curry paste"":""2 tbsp"",""spinach"":""1 cup""}","Simmer lentils, add curry paste and coconut milk, cook until thick.","Lentils are one of the oldest cultivated legumes.","Great for meal prep","{""calories"":500,""protein"":22,""carbs"":60,""fat"":18}","2026-04-02 13:30:00","2026-04-02 13:30:00"
-Vegetarian Omelette,"{""eggs"":""3"",""spinach"":""1 cup"",""cheese"":""50g"",""mushrooms"":""1/2 cup""}","Cook vegetables, add beaten eggs, sprinkle cheese and fold.","Eggs are one of the most complete protein sources.","Quick breakfast","{""calories"":380,""protein"":25,""carbs"":5,""fat"":28}","2026-04-03 09:00:00","2026-04-03 09:00:00"
-Avocado Toast Deluxe,"{""bread"":""2 slices"",""avocado"":""1"",""cherry tomatoes"":""5"",""seeds"":""1 tbsp""}","Toast bread, mash avocado, top with tomatoes and seeds.","Avocados are technically berries.","Add chili flakes for spice","{""calories"":320,""protein"":8,""carbs"":30,""fat"":20}","2026-04-03 10:15:00","2026-04-03 10:15:00"
-Quinoa Protein Salad,"{""quinoa"":""1 cup"",""chickpeas"":""1/2 cup"",""cucumber"":""1/2"",""feta"":""50g""}","Mix cooked quinoa with all ingredients and drizzle olive oil.","Quinoa is a complete plant protein.","Can be served cold","{""calories"":410,""protein"":16,""carbs"":50,""fat"":14}","2026-04-04 14:20:00","2026-04-04 14:20:00"
+Marca temporal,Name,Last Name,Email,Phone number,Address ,Emergency Contact Name,Emergency Contact Phone Number ,Date of Birth (dd/mm/yy)
+16/11/2024 12:52:51,Claudia,Amendola Torres,claudiamendolat1993@gmail.com,0892697948,"24 Abbots Grove Park
+Knocklyon, D16",Joyce Gaedizadeh / Juan Carlos Amendola,0879021106 / +52 9999 683761,29/07/1993
+16/11/2024 13:03:28,Joe,Fitzpatrick ,joepfitz96@gmail.com,0861589537,"44 Old kilmainham, D08HHE0 ",Sarah Fitzpatrick,0858482074,18/07/1991
+16/11/2024 13:08:09,Mark ,Burke,markburke_gmit@yahoo.ie,0860080641,Tallaght ,Carmel Eivers,0872970627,11/10/1991
+16/11/2024 13:08:45,luke,condon,lukegcondon98@outlook.ie,0877110351,Miskaun Glebe aughnasheelin,Sarah Condon,0862668193,18/05/1998
+16/11/2024 13:14:02,Theo,Mossop,theomossop@gmail.com,0863479598,"108 The Maples
+Clonskeagh",Brid mossop,+353 87 681 3183,10/10/1994
+16/11/2024 14:11:45,Andrea,Andreoli,andrea.andreoli@hotmail.it,+393338129779,"Herzog-Johann-Straße 40, 81245 München, Germania",Ambra,+393286016716,30/08/1992
+16/11/2024 14:16:38,Milo,Krawiec,milokrawiec@gmail.com,+447403764596,,Karina Krawiec,+447894569448,17/01/1998
+16/11/2024 14:27:26,Herin,Vora,herinvora9721.ie@gmail.com,353892127911,D09H7N5,Mayuresh Gupta,35389417832,1/02/1999
+17/11/2024 15:12:06,Hodei,Iraola,hodeiie@gmail.com,0831828672,"43 The View, Belin Woods, Newbridge, Co. Kildare",0873408000,Weixuan Guo,10/07/1987
+17/11/2024 18:41:59,Conor,Murphy,cmurph11235@gmail.com,0862154093,,Saoirse Sheehy Ariff,0866623859,2/11/1992
+17/11/2024 20:32:26,Akash,Murthy,akash.360@aol.com,0892061546,"Corlough, Drumshanbo, Co Leitrim, N41HN96",Geraldine,0879064445,7/08/1992
+27/11/2024 19:00:28,Carlos ,Silva,beto86_9@hotmail.com,+353 83 824 0829,,Genaro Repetto,+54 9 383 450-8236,11/06/1989
+7/12/2024 13:55:10,Ethan,Edwards,blueinson@gmail.com,0857426098,,Justin Edwards ,+1 910 544-7596,
+13/12/2024 11:03:36,Jen,Arlow,Jennyarlow@gmail.com,0867358896,,Wendy Arlow,0876542122,13/05/1997
+10/01/2025 9:17:20,Irene,Celebrin,irene.celebrin@gmail.com,0834357290,D09K259,Ivan Duarte ,083 037 6064,20/09/1995

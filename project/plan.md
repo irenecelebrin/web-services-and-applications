@@ -1,39 +1,71 @@
-# Design of the API 
+# Slackline Ireland web application: design  
 
 ## Concept 
 
-Recipe diary: save your favourite recipes and your tricks 
+Goal: Manage Slackline Ireland memberships. 
+The application will allow admins to manage memberships and membership requests. 
+Some members pay a contribution, others don't. 
+Optional: the application will allow new members to register. the application will need to be reviewed by an admin, before being added to the database. 
 
-Properties: 
+## Components 
+
+- A relational database (in theory, with MySQL, but it might be SqlLite, if easier to manage) 
+- Backned using Flask 
+- A Front End. this will be the last step 
+- eventually the code will be hosted in python
+
+
+## Properties: 
+    id
     name
-    ingredients
-    how-to
-    fun fact (str)
-    other
-    macros (dict)
-    date added 
-    date modified 
+    surname
+    phone number 
+    email
+    DOB
+    Emergency contact (dict: name: xx, surname: xx)
+    Date enrolled
+    Last contribution date
+    Contribution paid
+
 
 ## Functionalities 
 
-CREATE NEW RECIPE
+ADD NEW MEBER 
 required: 
-    name (str)
-    ingredients (dict)
+    name
+    surname
+    phone number 
+    email
+    DOB
+    emergency contact
 
-READ 
-- read all recipes 
-- get recipe by ID
-- recipe of the day (random recipe) -- sweet or savoury 
+There can be a form to add a new member as registration, pending admin review --> send automated emails. 
+
+READ ALL 
+2 views: 
+    - for admins 
+    See all details 
+    - for members 
+    See only 
+
+
+READ BY ID or SURNAME
 
 UPDATE
-- update: name, ingredients, how-to, other, fun fact, macro
+    - by id 
+
+DELETE 
 
 ## Database 
 
-- generate data synthetically and import to relational database (mySQL)
-https://chatgpt.com/share/69d28cd5-cfc8-8332-9e35-fc9446fe3917 
+Relational database, initially imported from a csv file 
+
+## Backup 
+
+Every time a change is made, a backup is created and stored on the cloud (where?). 
+It would be ideal to update the exsitng google spreadsheet file. 
 
 ## Hosting 
 
-... 
+Python anywhere 
+
