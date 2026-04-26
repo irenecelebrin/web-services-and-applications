@@ -5,7 +5,7 @@ import sqlite3
 from datetime import date
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent / "slackline.db"
+DB_PATH = Path(__file__).resolve().parent / "data" / "slackline.db"
 
 # canonical SELECT joining people + emergency_contacts + memberships
 _MEMBER_SELECT_SQL = """

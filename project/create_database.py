@@ -37,6 +37,7 @@ SCHEMA_STATEMENTS = [
 
 
 def create_database(db_path: Path) -> None:
+    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(db_path)
     try:
         conn.execute("PRAGMA foreign_keys = ON;")
@@ -48,7 +49,7 @@ def create_database(db_path: Path) -> None:
 
 
 def main() -> None:
-    db_path = Path(__file__).resolve().parent / "slackline.db"
+    db_path = Path(__file__).resolve().parent / "data" / "slackline.db"
     create_database(db_path)
     print(f"Database ready: {db_path}")
 

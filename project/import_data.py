@@ -10,7 +10,7 @@ from create_database import create_database
 project_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.join(project_dir, "data")
 anonymized_data = os.path.join(data_dir, "db_anonymised.csv")
-db_path = os.path.join(project_dir, "slackline.db")
+db_path = os.path.join(data_dir, "slackline.db")
 
 # parse registration date to format YYYY-MM-DD
 def _parse_registration_date(raw: str) -> str:
