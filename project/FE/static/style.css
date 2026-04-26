@@ -1,0 +1,390 @@
+/* ── Palette ──────────────────────────────────────────────────────────────
+   Background:        #f2f8f2  (very light green page background)
+   Card/surface:      #ffffff
+   Primary green:     #7dba84  (buttons, nav active state)
+   Hover green:       #5fa366
+   Border/accent:     #c4e0c4  (table borders, input focus ring)
+   Text (dark):       #2d3b2d
+   Text (muted):      #6a7f6a
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Reset & base ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background-color: #f2f8f2;
+    color: #2d3b2d;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── Navigation bar ───────────────────────────────────────────────────── */
+nav {
+    background-color: #7dba84;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 3.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+nav .brand {
+    text-decoration: none;
+    margin-right: auto;   /* push nav links to the right */
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #ffffff;
+}
+
+/* Logo image in the nav bar */
+nav .nav-logo {
+    height: 2.4rem;       /* fits neatly inside the 3.5rem nav */
+    width: auto;
+    border-radius: 4px;
+    display: block;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+}
+
+nav a:hover {
+    background-color: #5fa366;
+}
+
+/* ── Main content wrapper ─────────────────────────────────────────────── */
+main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* ── Page headings ────────────────────────────────────────────────────── */
+h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+    color: #2d3b2d;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #4a6b4a;
+}
+
+/* ── Card (used on member detail page) ───────────────────────────────── */
+.card {
+    background: #ffffff;
+    border: 1px solid #c4e0c4;
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Two-column definition list inside a card */
+.card dl {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    row-gap: 0.6rem;
+    column-gap: 1rem;
+}
+
+.card dt {
+    font-weight: 600;
+    color: #6a7f6a;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    align-self: start;
+    padding-top: 0.1rem;
+}
+
+.card dd {
+    color: #2d3b2d;
+}
+
+/* ── Members table ────────────────────────────────────────────────────── */
+.table-wrapper {
+    background: #ffffff;
+    border: 1px solid #c4e0c4;
+    border-radius: 8px;
+    overflow: hidden;             /* clip the table corners */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+}
+
+thead {
+    background-color: #c4e0c4;
+}
+
+thead th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: #2d3b2d;
+    font-size: 0.825rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+tbody tr {
+    border-top: 1px solid #e8f3e8;
+    transition: background-color 0.12s;
+}
+
+tbody tr:hover {
+    background-color: #f0f9f0;
+}
+
+tbody td {
+    padding: 0.7rem 1rem;
+}
+
+tbody td a {
+    color: #2d3b2d;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+tbody td a:hover {
+    color: #5fa366;
+    text-decoration: underline;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.15s, opacity 0.15s;
+}
+
+.btn-primary {
+    background-color: #7dba84;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #5fa366;
+}
+
+.btn-secondary {
+    background-color: #e8f3e8;
+    color: #2d3b2d;
+    border: 1px solid #c4e0c4;
+}
+
+.btn-secondary:hover {
+    background-color: #d0ebd0;
+}
+
+.btn-danger {
+    background-color: #e07878;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #c45f5f;
+}
+
+/* Inline row of buttons */
+.btn-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.25rem;
+}
+
+/* ── Forms ────────────────────────────────────────────────────────────── */
+form.member-form {
+    background: #ffffff;
+    border: 1px solid #c4e0c4;
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    max-width: 620px;
+}
+
+/* Section heading inside the form */
+form.member-form .form-section {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6a7f6a;
+    margin: 1.25rem 0 0.6rem;
+    border-bottom: 1px solid #e8f3e8;
+    padding-bottom: 0.25rem;
+}
+
+form.member-form .form-section:first-child {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #4a6b4a;
+}
+
+/* Mark required fields */
+.form-group label .required {
+    color: #c45f5f;
+    margin-left: 0.2rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #c4e0c4;
+    border-radius: 5px;
+    font-size: 0.925rem;
+    color: #2d3b2d;
+    background: #fafffe;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #7dba84;
+    box-shadow: 0 0 0 3px rgba(125, 186, 132, 0.2);
+}
+
+/* ── Error / flash messages ───────────────────────────────────────────── */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    background-color: #fce8e8;
+    border: 1px solid #e07878;
+    color: #7a2020;
+}
+
+/* ── Empty-state message (no members found) ───────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6a7f6a;
+}
+
+/* ── Landing page — hero ──────────────────────────────────────────────── */
+
+/* The hero section stretches edge-to-edge and uses the photo as background */
+.hero {
+    width: 100%;
+    min-height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Negative margin cancels the padding of <main> so the image goes full-width */
+    margin: -2rem -1.5rem 0;
+    width: calc(100% + 3rem);
+}
+
+/* Semi-transparent dark overlay so white text stays readable */
+.hero-overlay {
+    background-color: rgba(30, 50, 30, 0.45);
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.hero-title {
+    color: #ffffff;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 0.75rem;
+}
+
+.hero-subtitle {
+    color: #e8f5e8;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Landing page — sections below the hero ───────────────────────────── */
+.landing-section {
+    margin-top: 3rem;
+}
+
+.landing-section h2 {
+    font-size: 1.3rem;
+    color: #2d3b2d;
+    margin-bottom: 1.25rem;
+}
+
+/* Three-column grid for contact cards */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.contact-card {
+    background: #ffffff;
+    border: 1px solid #c4e0c4;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+}
+
+.contact-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6a7f6a;
+    margin-bottom: 0.4rem;
+}
+
+.contact-card a,
+.contact-card span {
+    color: #2d3b2d;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    color: #5fa366;
+    text-decoration: underline;
+}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ member.name }} {{ member.last_name }} — Slackline Ireland{% endblock %}
+
+{% block content %}
+<h1>{{ member.name }} {{ member.last_name }}</h1>
+
+<!-- ── Personal details ────────────────────────────────────────────────── -->
+<div class="card">
+    <h2>Personal details</h2>
+    <dl>
+        <dt>ID</dt>        <dd>{{ member.id }}</dd>
+        <dt>Email</dt>     <dd>{{ member.email or '—' }}</dd>
+        <dt>Phone</dt>     <dd>{{ member.phone or '—' }}</dd>
+        <dt>Address</dt>   <dd>{{ member.address or '—' }}</dd>
+        <dt>Date of birth</dt> <dd>{{ member.date_of_birth or '—' }}</dd>
+    </dl>
+</div>
+
+<!-- ── Emergency contact ───────────────────────────────────────────────── -->
+<div class="card">
+    <h2>Emergency contact</h2>
+    <dl>
+        <dt>Name</dt>  <dd>{{ member.emergency_contact_name or '—' }}</dd>
+        <dt>Phone</dt> <dd>{{ member.emergency_contact_phone or '—' }}</dd>
+    </dl>
+</div>
+
+<!-- ── Membership ──────────────────────────────────────────────────────── -->
+<div class="card">
+    <h2>Membership</h2>
+    <dl>
+        <dt>Registered</dt>    <dd>{{ member.registration_date or '—' }}</dd>
+        <dt>Payment date</dt>  <dd>{{ member.payment_date or '—' }}</dd>
+        <dt>Amount paid</dt>
+        <dd>
+            {% if member.payment_amount is not none %}
+                €{{ "%.2f"|format(member.payment_amount) }}
+            {% else %}
+                —
+            {% endif %}
+        </dd>
+    </dl>
+</div>
+
+<!-- ── Actions ─────────────────────────────────────────────────────────── -->
+<div class="btn-row">
+    <!-- Edit: navigate to the edit form for this member -->
+    <a class="btn btn-primary" href="{{ url_for('edit_member_form', id=member.id) }}">Edit</a>
+
+    <!-- Back: return to the members list -->
+    <a class="btn btn-secondary" href="{{ url_for('get_all_persons') }}">← All members</a>
+
+    <!-- Delete: submits a POST form; browser confirm() prevents accidents -->
+    <form method="POST" action="{{ url_for('delete_member', id=member.id) }}"
+          onsubmit="return confirm('Delete {{ member.name }} {{ member.last_name }}? This cannot be undone.');">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
+{% endblock %}

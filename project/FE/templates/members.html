@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Members — Slackline Ireland{% endblock %}
+
+{% block content %}
+<h1>Members</h1>
+
+{% if members %}
+    <!-- Table listing all members; each name links to the member's detail page -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Registered</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in members %}
+                <tr>
+                    <td>{{ m.id }}</td>
+                    <!-- Clicking the name navigates to the member detail page -->
+                    <td>
+                        <a href="{{ url_for('get_person_by_id', id=m.id) }}">
+                            {{ m.name }} {{ m.last_name }}
+                        </a>
+                    </td>
+                    <td>{{ m.email or '—' }}</td>
+                    <td>{{ m.phone or '—' }}</td>
+                    <td>{{ m.registration_date or '—' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <!-- Shown when the database has no members yet -->
+    <div class="empty-state">
+        <p>No members yet. <a href="{{ url_for('new_member_form') }}">Add the first one.</a></p>
+    </div>
+{% endif %}
+{% endblock %}

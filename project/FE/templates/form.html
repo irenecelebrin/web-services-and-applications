@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if member %}Edit {{ member.name }} {{ member.last_name }}{% else %}Add Member{% endif %}
+    — Slackline Ireland
+{% endblock %}
+
+{% block content %}
+<h1>{% if member %}Edit {{ member.name }} {{ member.last_name }}{% else %}Add Member{% endif %}</h1>
+
+<!-- Show validation error if the server returned one -->
+{% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+{% endif %}
+
+<!--
+    The action points to the correct route:
+      - Adding:  POST /persons
+      - Editing: POST /persons/<id>/edit
+    The `member` variable is set when editing (pre-fills the fields), and
+    None when adding (fields start empty).
+-->
+<form class="member-form" method="POST"
+      action="{% if member %}{{ url_for('edit_member', id=member.id) }}{% else %}{{ url_for('create_persons') }}{% endif %}">
+
+    <!-- ── Personal details ──────────────────────────────────────────── -->
+    <div class="form-section">Personal details</div>
+
+    <div class="form-group">
+        <label for="name">First name <span class="required">*</span></label>
+        <input type="text" id="name" name="name"
+               value="{{ member.name if member else '' }}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="last_name">Last name <span class="required">*</span></label>
+        <input type="text" id="last_name" name="last_name"
+               value="{{ member.last_name if member else '' }}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email"
+               value="{{ member.email if member else '' }}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone <span class="required">*</span></label>
+        <input type="tel" id="phone" name="phone"
+               value="{{ member.phone if member else '' }}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address"
+               value="{{ member.address if member else '' }}" />
+    </div>
+
+    <div class="form-group">
+        <label for="date_of_birth">Date of birth (YYYY-MM-DD)</label>
+        <input type="date" id="date_of_birth" name="date_of_birth"
+               value="{{ member.date_of_birth if member else '' }}" />
+    </div>
+
+    <!-- ── Emergency contact ─────────────────────────────────────────── -->
+    <div class="form-section">Emergency contact</div>
+
+    <div class="form-group">
+        <label for="emergency_contact_name">Name <span class="required">*</span></label>
+        <input type="text" id="emergency_contact_name" name="emergency_contact_name"
+               value="{{ member.emergency_contact_name if member else '' }}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="emergency_contact_phone">Phone <span class="required">*</span></label>
+        <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone"
+               value="{{ member.emergency_contact_phone if member else '' }}" required />
+    </div>
+
+    <!-- ── Membership payment (optional) ────────────────────────────── -->
+    <div class="form-section">Membership payment <small style="font-weight:400;">(optional)</small></div>
+
+    <div class="form-group">
+        <label for="payment_amount">Amount paid (€)</label>
+        <!-- Show existing amount if editing, otherwise leave blank -->
+        <input type="number" id="payment_amount" name="payment_amount" min="0" step="0.01"
+               value="{{ member.payment_amount if member and member.payment_amount is not none else '' }}" />
+    </div>
+
+    <!-- ── Submit / cancel ───────────────────────────────────────────── -->
+    <div class="btn-row" style="margin-top: 1.5rem;">
+        <button type="submit" class="btn btn-primary">
+            {% if member %}Save changes{% else %}Add member{% endif %}
+        </button>
+        <!-- Cancel returns to the detail page (edit) or the list (add) -->
+        {% if member %}
+            <a class="btn btn-secondary" href="{{ url_for('get_person_by_id', id=member.id) }}">Cancel</a>
+        {% else %}
+            <a class="btn btn-secondary" href="{{ url_for('get_all_persons') }}">Cancel</a>
+        {% endif %}
+    </div>
+
+</form>
+{% endblock %}
