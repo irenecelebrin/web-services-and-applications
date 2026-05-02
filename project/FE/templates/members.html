@@ -1,45 +1,75 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members — Slackline Ireland</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
 
-{% block title %}Members — Slackline Ireland{% endblock %}
+    <nav>
+        <a class="brand" href="/">
+            <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
+            Slackline Ireland
+        </a>
+        <a href="/">Home</a>
+        <a href="/members">Members</a>
+        <a href="/form">Add Member</a>
+    </nav>
 
-{% block content %}
-<h1>Members</h1>
+    <main>
+        <h1>Members</h1>
+        <div id="content">Loading…</div>
+    </main>
 
-{% if members %}
-    <!-- Table listing all members; each name links to the member's detail page -->
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Registered</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for m in members %}
-                <tr>
-                    <td>{{ m.id }}</td>
-                    <!-- Clicking the name navigates to the member detail page -->
-                    <td>
-                        <a href="{{ url_for('get_person_by_id', id=m.id) }}">
-                            {{ m.name }} {{ m.last_name }}
-                        </a>
-                    </td>
-                    <td>{{ m.email or '—' }}</td>
-                    <td>{{ m.phone or '—' }}</td>
-                    <td>{{ m.registration_date or '—' }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-{% else %}
-    <!-- Shown when the database has no members yet -->
-    <div class="empty-state">
-        <p>No members yet. <a href="{{ url_for('new_member_form') }}">Add the first one.</a></p>
-    </div>
-{% endif %}
-{% endblock %}
+    <script>
+        fetch('/api/persons')
+            .then(res => {
+                if (!res.ok) throw new Error('Request failed');
+                return res.json();
+            })
+            .then(members => {
+                const el = document.getElementById('content');
+
+                if (!members.length) {
+                    el.innerHTML = `
+                        <div class="empty-state">
+                            <p>No members yet. <a href="/form">Add the first one.</a></p>
+                        </div>`;
+                    return;
+                }
+
+                const rows = members.map(m => `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td><a href="/member?id=${m.id}">${m.name} ${m.last_name}</a></td>
+                        <td>${m.email || '—'}</td>
+                        <td>${m.phone || '—'}</td>
+                        <td>${m.registration_date || '—'}</td>
+                    </tr>`).join('');
+
+                el.innerHTML = `
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Registered</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>`;
+            })
+            .catch(() => {
+                document.getElementById('content').innerHTML =
+                    '<p class="alert alert-error">Failed to load members.</p>';
+            });
+    </script>
+
+</body>
+</html>

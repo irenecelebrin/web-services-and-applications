@@ -1,104 +1,168 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Member — Slackline Ireland</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
 
-{% block title %}
-    {% if member %}Edit {{ member.name }} {{ member.last_name }}{% else %}Add Member{% endif %}
-    — Slackline Ireland
-{% endblock %}
+    <nav>
+        <a class="brand" href="/">
+            <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
+            Slackline Ireland
+        </a>
+        <a href="/">Home</a>
+        <a href="/members">Members</a>
+        <a href="/form">Add Member</a>
+    </nav>
 
-{% block content %}
-<h1>{% if member %}Edit {{ member.name }} {{ member.last_name }}{% else %}Add Member{% endif %}</h1>
+    <main>
+        <h1 id="form-title">Add Member</h1>
 
-<!-- Show validation error if the server returned one -->
-{% if error %}
-    <div class="alert alert-error">{{ error }}</div>
-{% endif %}
+        <div id="error-msg" class="alert alert-error" style="display:none; max-width:620px;"></div>
 
-<!--
-    The action points to the correct route:
-      - Adding:  POST /persons
-      - Editing: POST /persons/<id>/edit
-    The `member` variable is set when editing (pre-fills the fields), and
-    None when adding (fields start empty).
--->
-<form class="member-form" method="POST"
-      action="{% if member %}{{ url_for('edit_member', id=member.id) }}{% else %}{{ url_for('create_persons') }}{% endif %}">
+        <form class="member-form" id="member-form">
 
-    <!-- ── Personal details ──────────────────────────────────────────── -->
-    <div class="form-section">Personal details</div>
+            <!-- ── Personal details ──────────────────────────────────── -->
+            <div class="form-section">Personal details</div>
 
-    <div class="form-group">
-        <label for="name">First name <span class="required">*</span></label>
-        <input type="text" id="name" name="name"
-               value="{{ member.name if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="name">First name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required />
+            </div>
 
-    <div class="form-group">
-        <label for="last_name">Last name <span class="required">*</span></label>
-        <input type="text" id="last_name" name="last_name"
-               value="{{ member.last_name if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="last_name">Last name <span class="required">*</span></label>
+                <input type="text" id="last_name" name="last_name" required />
+            </div>
 
-    <div class="form-group">
-        <label for="email">Email <span class="required">*</span></label>
-        <input type="email" id="email" name="email"
-               value="{{ member.email if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required />
+            </div>
 
-    <div class="form-group">
-        <label for="phone">Phone <span class="required">*</span></label>
-        <input type="tel" id="phone" name="phone"
-               value="{{ member.phone if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="phone">Phone <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required />
+            </div>
 
-    <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address"
-               value="{{ member.address if member else '' }}" />
-    </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" />
+            </div>
 
-    <div class="form-group">
-        <label for="date_of_birth">Date of birth (YYYY-MM-DD)</label>
-        <input type="date" id="date_of_birth" name="date_of_birth"
-               value="{{ member.date_of_birth if member else '' }}" />
-    </div>
+            <div class="form-group">
+                <label for="date_of_birth">Date of birth</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" />
+            </div>
 
-    <!-- ── Emergency contact ─────────────────────────────────────────── -->
-    <div class="form-section">Emergency contact</div>
+            <!-- ── Emergency contact ─────────────────────────────────── -->
+            <div class="form-section">Emergency contact</div>
 
-    <div class="form-group">
-        <label for="emergency_contact_name">Name <span class="required">*</span></label>
-        <input type="text" id="emergency_contact_name" name="emergency_contact_name"
-               value="{{ member.emergency_contact_name if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="emergency_contact_name">Name <span class="required">*</span></label>
+                <input type="text" id="emergency_contact_name" name="emergency_contact_name" required />
+            </div>
 
-    <div class="form-group">
-        <label for="emergency_contact_phone">Phone <span class="required">*</span></label>
-        <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone"
-               value="{{ member.emergency_contact_phone if member else '' }}" required />
-    </div>
+            <div class="form-group">
+                <label for="emergency_contact_phone">Phone <span class="required">*</span></label>
+                <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone" required />
+            </div>
 
-    <!-- ── Membership payment (optional) ────────────────────────────── -->
-    <div class="form-section">Membership payment <small style="font-weight:400;">(optional)</small></div>
+            <!-- ── Membership payment (optional) ─────────────────────── -->
+            <div class="form-section">
+                Membership payment <small style="font-weight:400;">(optional)</small>
+            </div>
 
-    <div class="form-group">
-        <label for="payment_amount">Amount paid (€)</label>
-        <!-- Show existing amount if editing, otherwise leave blank -->
-        <input type="number" id="payment_amount" name="payment_amount" min="0" step="0.01"
-               value="{{ member.payment_amount if member and member.payment_amount is not none else '' }}" />
-    </div>
+            <div class="form-group">
+                <label for="payment_amount">Amount paid (€)</label>
+                <input type="number" id="payment_amount" name="payment_amount" min="0" step="0.01" />
+            </div>
 
-    <!-- ── Submit / cancel ───────────────────────────────────────────── -->
-    <div class="btn-row" style="margin-top: 1.5rem;">
-        <button type="submit" class="btn btn-primary">
-            {% if member %}Save changes{% else %}Add member{% endif %}
-        </button>
-        <!-- Cancel returns to the detail page (edit) or the list (add) -->
-        {% if member %}
-            <a class="btn btn-secondary" href="{{ url_for('get_person_by_id', id=member.id) }}">Cancel</a>
-        {% else %}
-            <a class="btn btn-secondary" href="{{ url_for('get_all_persons') }}">Cancel</a>
-        {% endif %}
-    </div>
+            <!-- ── Submit / cancel ───────────────────────────────────── -->
+            <div class="btn-row" style="margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary" id="submit-btn">Add member</button>
+                <a class="btn btn-secondary" id="cancel-btn" href="/members">Cancel</a>
+            </div>
 
-</form>
-{% endblock %}
+        </form>
+    </main>
+
+    <script>
+        const id = new URLSearchParams(window.location.search).get('id');
+        const isEdit = Boolean(id);
+
+        function prefill(m) {
+            document.title = `Edit ${m.name} ${m.last_name} — Slackline Ireland`;
+            document.getElementById('form-title').textContent = `Edit ${m.name} ${m.last_name}`;
+            document.getElementById('submit-btn').textContent = 'Save changes';
+            document.getElementById('cancel-btn').href = `/member?id=${m.id}`;
+
+            document.getElementById('name').value                      = m.name || '';
+            document.getElementById('last_name').value                 = m.last_name || '';
+            document.getElementById('email').value                     = m.email || '';
+            document.getElementById('phone').value                     = m.phone || '';
+            document.getElementById('address').value                   = m.address || '';
+            document.getElementById('date_of_birth').value             = m.date_of_birth || '';
+            document.getElementById('emergency_contact_name').value    = m.emergency_contact_name || '';
+            document.getElementById('emergency_contact_phone').value   = m.emergency_contact_phone || '';
+            document.getElementById('payment_amount').value            =
+                m.payment_amount != null ? m.payment_amount : '';
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('error-msg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        // In edit mode, fetch existing data and pre-fill the form
+        if (isEdit) {
+            fetch(`/api/persons/${id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error('Not found');
+                    return res.json();
+                })
+                .then(m => prefill(m))
+                .catch(() => window.location.href = '/members');
+        }
+
+        document.getElementById('member-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            document.getElementById('error-msg').style.display = 'none';
+
+            const formData = new FormData(e.target);
+            const payload = {};
+            for (const [k, v] of formData.entries()) {
+                const trimmed = v.trim();
+                payload[k] = trimmed !== '' ? trimmed : null;
+            }
+
+            const url    = isEdit ? `/api/persons/${id}` : '/api/persons';
+            const method = isEdit ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    showError(err.error || 'An error occurred.');
+                    return;
+                }
+
+                const saved = await res.json();
+                window.location.href = `/member?id=${saved.id}`;
+            } catch {
+                showError('Network error — please try again.');
+            }
+        });
+    </script>
+
+</body>
+</html>

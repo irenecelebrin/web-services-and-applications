@@ -1,41 +1,60 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slackline Ireland</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
 
-{% block title %}Slackline Ireland{% endblock %}
+    <nav>
+        <a class="brand" href="/">
+            <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
+            Slackline Ireland
+        </a>
+        <a href="/">Home</a>
+        <a href="/members">Members</a>
+        <a href="/form">Add Member</a>
+    </nav>
 
-{% block content %}
+    <main>
 
-<!-- ── Hero — full-width photo with welcome text overlaid ─────────────── -->
-<section class="hero"
-         style="background-image: url('{{ url_for('gallery', filename='merrion_square.jpeg') }}');">
-    <div class="hero-overlay">
-        <h1 class="hero-title">Welcome to Slackline Ireland</h1>
-        <p class="hero-subtitle">
-            Walking the line — together, outdoors, across Ireland.
-        </p>
-    </div>
-</section>
+        <!-- ── Hero — full-width photo with welcome text overlaid ──────── -->
+        <section class="hero"
+                 style="background-image: url('/gallery/merrion_square.jpeg');">
+            <div class="hero-overlay">
+                <h1 class="hero-title">Welcome to Slackline Ireland</h1>
+                <p class="hero-subtitle">
+                    Walking the line — together, outdoors, across Ireland.
+                </p>
+            </div>
+        </section>
 
-<!-- ── Contacts block ─────────────────────────────────────────────────── -->
-<section class="landing-section">
-    <h2>Get in touch</h2>
-    <div class="contact-grid">
+        <!-- ── Contacts block ──────────────────────────────────────────── -->
+        <section class="landing-section">
+            <h2>Get in touch</h2>
+            <div class="contact-grid">
 
-        <div class="contact-card">
-            <div class="contact-label">Email</div>
-            <a href="mailto:hello@slacklineireland.ie">hello@slacklineireland.ie</a>
-        </div>
+                <div class="contact-card">
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:hello@slacklineireland.ie">hello@slacklineireland.ie</a>
+                </div>
 
-        <div class="contact-card">
-            <div class="contact-label">Instagram</div>
-            <a href="https://instagram.com/slacklineireland" target="_blank">@slacklineireland</a>
-        </div>
+                <div class="contact-card">
+                    <div class="contact-label">Instagram</div>
+                    <a href="https://instagram.com/slacklineireland" target="_blank">@slacklineireland</a>
+                </div>
 
-        <div class="contact-card">
-            <div class="contact-label">Meetups</div>
-            <span>Merrion Square, Dublin — every Sunday</span>
-        </div>
+                <div class="contact-card">
+                    <div class="contact-label">Meetups</div>
+                    <span>Merrion Square, Dublin — every Sunday</span>
+                </div>
 
-    </div>
-</section>
+            </div>
+        </section>
 
-{% endblock %}
+    </main>
+
+</body>
+</html>
