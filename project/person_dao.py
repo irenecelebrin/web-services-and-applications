@@ -190,7 +190,13 @@ def delete(id: int) -> bool:
             conn.execute("DELETE FROM memberships WHERE person_id = ?", (id,))
             conn.execute("DELETE FROM people WHERE id = ?", (id,))
             if ec_id is not None:
-                conn.execute("DELETE FROM emergency_contacts WHERE id = ?", (ec_id,))
+                # precaution: check if there are other people with the same emergency contact
+                others = conn.execute(
+                    "SELECT COUNT(*) FROM people WHERE emergency_contact_id = ?",
+                    (ec_id,),
+                ).fetchone()[0]
+                if others == 0:
+                    conn.execute("DELETE FROM emergency_contacts WHERE id = ?", (ec_id,))
     finally:
         conn.close()
 

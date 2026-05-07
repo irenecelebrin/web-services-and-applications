@@ -13,8 +13,11 @@
             <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
             Slackline Ireland
         </a>
-        <a href="/">Home</a>
-        <a href="/members">Members</a>
+        <form id="nav-search" class="nav-search">
+            <input type="text" name="query" placeholder="Search by surname / email" />
+            <button type="submit">Go</button>
+        </form>
+        <a href="/persons">Members</a>
         <a href="/form">Add Member</a>
     </nav>
 
@@ -84,13 +87,21 @@
             <!-- ── Submit / cancel ───────────────────────────────────── -->
             <div class="btn-row" style="margin-top: 1.5rem;">
                 <button type="submit" class="btn btn-primary" id="submit-btn">Add member</button>
-                <a class="btn btn-secondary" id="cancel-btn" href="/members">Cancel</a>
+                <a class="btn btn-secondary" id="cancel-btn" href="/persons">Cancel</a>
             </div>
 
         </form>
     </main>
 
     <script>
+        document.getElementById('nav-search').addEventListener('submit', e => {
+            e.preventDefault();
+            const query = e.target.query.value.trim();
+            if (!query) return;
+            const type = query.includes('@') ? 'email' : 'surname';
+            window.location.href = `/persons/${type}/${encodeURIComponent(query)}`;
+        });
+
         const id = new URLSearchParams(window.location.search).get('id');
         const isEdit = Boolean(id);
 
@@ -98,7 +109,7 @@
             document.title = `Edit ${m.name} ${m.last_name} — Slackline Ireland`;
             document.getElementById('form-title').textContent = `Edit ${m.name} ${m.last_name}`;
             document.getElementById('submit-btn').textContent = 'Save changes';
-            document.getElementById('cancel-btn').href = `/member?id=${m.id}`;
+            document.getElementById('cancel-btn').href = `/person/${m.id}`;
 
             document.getElementById('name').value                      = m.name || '';
             document.getElementById('last_name').value                 = m.last_name || '';
@@ -120,13 +131,13 @@
 
         // In edit mode, fetch existing data and pre-fill the form
         if (isEdit) {
-            fetch(`/api/persons/${id}`)
+            fetch(`/person/${id}`, { headers: { 'Accept': 'application/json' } })
                 .then(res => {
                     if (!res.ok) throw new Error('Not found');
                     return res.json();
                 })
                 .then(m => prefill(m))
-                .catch(() => window.location.href = '/members');
+                .catch(() => window.location.href = '/persons');
         }
 
         document.getElementById('member-form').addEventListener('submit', async e => {
@@ -140,7 +151,7 @@
                 payload[k] = trimmed !== '' ? trimmed : null;
             }
 
-            const url    = isEdit ? `/api/persons/${id}` : '/api/persons';
+            const url    = isEdit ? `/person/${id}` : '/form';
             const method = isEdit ? 'PUT' : 'POST';
 
             try {
@@ -157,7 +168,7 @@
                 }
 
                 const saved = await res.json();
-                window.location.href = `/member?id=${saved.id}`;
+                window.location.href = `/person/${saved.id}`;
             } catch {
                 showError('Network error — please try again.');
             }

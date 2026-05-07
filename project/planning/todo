@@ -1,2 +1,5 @@
 phone numbers --> one number for each field 
 phone numbers --> separate numbers 
+emergency contacts --> one row for each id --> change parsing 
+
+add comments to person DAO

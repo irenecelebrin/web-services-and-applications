@@ -13,8 +13,11 @@
             <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
             Slackline Ireland
         </a>
-        <a href="/">Home</a>
-        <a href="/members">Members</a>
+        <form id="nav-search" class="nav-search">
+            <input type="text" name="query" placeholder="Search by surname / email" />
+            <button type="submit">Go</button>
+        </form>
+        <a href="/persons">Members</a>
         <a href="/form">Add Member</a>
     </nav>
 
@@ -55,6 +58,16 @@
         </section>
 
     </main>
+
+    <script>
+        document.getElementById('nav-search').addEventListener('submit', e => {
+            e.preventDefault();
+            const query = e.target.query.value.trim();
+            if (!query) return;
+            const type = query.includes('@') ? 'email' : 'surname';
+            window.location.href = `/persons/${type}/${encodeURIComponent(query)}`;
+        });
+    </script>
 
 </body>
 </html>

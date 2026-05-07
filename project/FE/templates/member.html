@@ -13,8 +13,11 @@
             <img src="/gallery/slackline_ireland.jpeg" alt="Slackline Ireland" class="nav-logo" />
             Slackline Ireland
         </a>
-        <a href="/">Home</a>
-        <a href="/members">Members</a>
+        <form id="nav-search" class="nav-search">
+            <input type="text" name="query" placeholder="Search by surname / email" />
+            <button type="submit">Go</button>
+        </form>
+        <a href="/persons">Members</a>
         <a href="/form">Add Member</a>
     </nav>
 
@@ -23,12 +26,20 @@
     </main>
 
     <script>
-        const id = new URLSearchParams(window.location.search).get('id');
+        document.getElementById('nav-search').addEventListener('submit', e => {
+            e.preventDefault();
+            const query = e.target.query.value.trim();
+            if (!query) return;
+            const type = query.includes('@') ? 'email' : 'surname';
+            window.location.href = `/persons/${type}/${encodeURIComponent(query)}`;
+        });
+
+        const id = window.location.pathname.split('/').pop();
 
         if (!id) {
-            window.location.href = '/members';
+            window.location.href = '/persons';
         } else {
-            fetch(`/api/persons/${id}`)
+            fetch(`/person/${id}`, { headers: { 'Accept': 'application/json' } })
                 .then(res => {
                     if (!res.ok) throw new Error('Not found');
                     return res.json();
@@ -73,17 +84,17 @@
 
                         <div class="btn-row">
                             <a class="btn btn-primary" href="/form?id=${m.id}">Edit</a>
-                            <a class="btn btn-secondary" href="/members">← All members</a>
+                            <a class="btn btn-secondary" href="/persons">← All members</a>
                             <button class="btn btn-danger" id="delete-btn">Delete</button>
                         </div>`;
 
                     document.getElementById('delete-btn').addEventListener('click', () => {
                         if (!confirm(`Delete ${m.name} ${m.last_name}? This cannot be undone.`)) return;
 
-                        fetch(`/api/persons/${m.id}`, { method: 'DELETE' })
+                        fetch(`/person/${m.id}`, { method: 'DELETE' })
                             .then(res => {
                                 if (!res.ok) throw new Error('Delete failed');
-                                window.location.href = '/members';
+                                window.location.href = '/persons';
                             })
                             .catch(() => alert('Failed to delete member.'));
                     });
