@@ -19,9 +19,17 @@ Thi project is a REST API created for the admins of the sports association Slack
 
 ## Getting started 
 
+### Hosted application
+
+The application is available at [https://celebrin.eu.pythonanywhere.com/](https://celebrin.eu.pythonanywhere.com/). 
+
+The required code to run the Flask App was imported to [eu.pythonanywhere.com](eu.pythonanywhere.com) and is now always available without the need to run the code locally. 
+
 ### Dependencies
 
-The API connects a relational database to a Front End in Javascript. The programming languages used are: 
+See below the requirements to run the code locally. 
+
+The programming languages used are: 
 
 - SQL (the database)
 - Python (for back end)
@@ -30,8 +38,9 @@ The API connects a relational database to a Front End in Javascript. The program
 To install the required dependencies: 
 
     pip install -r requirements.txt 
+ 
 
-### Running the application locally 
+#### Running the application locally 
 
 Start the Flask app: 
 
@@ -62,10 +71,9 @@ For more information on curl requests, visit [curl.se](https://curl.se/docs/http
 
     curl --help
 
-### Hosted version  
 
+> It is possible to make curl requests to the hosted application replacing the url in the requests. 
 
-la-dee-da 
 
 
 ## The implementation 
