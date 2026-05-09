@@ -98,12 +98,12 @@ def form_page():
 
 # ── HTML page routes (serve static files) ──────────────────────────────────
 
+# static route to landing page 
 @app.route("/")
 def index():
     return send_from_directory("FE/templates", "index.html")
 
-
-
+# static route to gallery images 
 @app.route("/gallery/<path:filename>")
 def gallery(filename):
     return send_from_directory("FE/gallery", filename)
