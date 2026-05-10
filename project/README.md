@@ -44,11 +44,11 @@ To make curl requests from your terminal,  use the routes described in section *
 
 View a member by id: 
 
-    curl -H "Accept: application/json" http://localhost:5000/person/1
+    curl -H "Accept: application/json" http://127.0.0.1:5000/person/1
 
 Create a new member: 
 
-    curl -X POST http://localhost:5000/form \
+    curl -X POST http://127.0.0.1:5000/form \
     -H "Content-Type: application/json" \
     -d '{
         "name": "John",
