@@ -1,9 +1,11 @@
 ## Parse members data from csv and import to database 
 
+# import dependencies 
 import csv
 import os
 import sqlite3
 
+# import custom functions 
 from create_database import create_database
 
 # set directory paths 
@@ -96,6 +98,7 @@ def import_rows(conn: sqlite3.Connection, csv_path: str) -> int:
 def main() -> None:
     # check if csv file exists
     if not os.path.isfile(anonymized_data):
+        # system exit exception: https://realpython.com/ref/builtin-exceptions/systemexit/#:~:text=SystemExit%20is%20a%20built%2Din,code%20that%20targets%20catching%20Exception%20.
         raise SystemExit(f"CSV not found: {anonymized_data}")
 
     # create database
@@ -120,6 +123,7 @@ def main() -> None:
     print(f"Imported {n} members from {anonymized_data}")
     print(f"Database: {os.path.abspath(db_path)}")
 
+# ── Main ──────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     main()
