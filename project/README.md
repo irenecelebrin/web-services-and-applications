@@ -2,7 +2,7 @@
 
 Final project for the course "Web services and applications", Higher Diploma in Computing for Data Analytics, ATU Galway Mayo, 2026. 
 
-The project is a REST API created for the admins of the sports association Slackline Ireland to manage member registrations, subscriptions and emergency contacts. 
+The project is a REST API and web application created for the admins of the sports association Slackline Ireland to manage member registrations, subscriptions and emergency contacts. 
 
 ## The project: Slackline Ireland memberships 
 
@@ -31,13 +31,12 @@ Programming languages used:
 
 ### Hosted application
 
-The application is available at [https://celebrin.eu.pythonanywhere.com/](https://celebrin.eu.pythonanywhere.com/). 
+The code required to run the Flask App was imported to [eu.pythonanywhere.com](eu.pythonanywhere.com) and is now always available without running the code locally. The application is available at [https://celebrin.eu.pythonanywhere.com/](https://celebrin.eu.pythonanywhere.com/). 
 
-The code required to run the Flask App was imported to [eu.pythonanywhere.com](eu.pythonanywhere.com) and is now always available without running the code locally. 
 
 ### Local application
 
-To run the code locally, install the the required dependencies: 
+To run the code locally, install the required dependencies: 
 
     pip install -r requirements.txt 
  
@@ -50,7 +49,7 @@ To perform CRUD operations using the UI, open this url with your browser:
 
     http://127.0.0.1:5000
 
-To make curl requests from your terminal,  use the routes described in section **2. Backend / Flask app**, adding to the Headers the parameter *Accept: application/json*.  
+To make curl requests from your terminal,  use the routes described in section **2. Flask app and person DAO**, adding to the Headers the parameter *Accept: application/json*.  
 
 View a member by id: 
 
@@ -97,14 +96,17 @@ The database is created using the script [create_database.py](create_database.py
 - **People**: the main table with the list of members, contacts and addresses. It includes 1 foreign key linking to the table *emergency contacts*. 
 
 <img src="data/schema_people.png" alt="People schema" width="600">
+<br><br>
 
 - **Emergency contacts**: name and numbers of emergency contacts for every member.  
 
 <img src="data/schema_contacts.png" alt="Emergency contacts" width="600">
+<br><br>
 
 - **Memberships**: it includes data like registration dates and payments (note: paying a contribution is not required, any member can choose to do it to fund the organization and access extra activities).
 
 <img src="data/schema_memberships.png" alt="Memberships" width="600">
+<br><br>
 
 How to use SQLite: [sqllite.org](https://sqlite.org/), [sqlite3 on python](https://docs.python.org/3/library/sqlite3.html)
 
@@ -158,7 +160,6 @@ Every page shares a navigation bar that includes a smart search field:
 **Member detail**: [member.html](FE/templates/member.html) shows personal information, emergency contact, and membership/payment data, together with Edit and Delete buttons (linked to the update/delete routes). 
 
 **Form page**: [form.html](FE/templates/form.html) handles both new-member creation and editing of existing members: when a member ID is passed as a query parameter (`?id=`), the form pre-fills with the current data and submits a PUT request; otherwise it submits a POST to create a new member.
-
 
 
 ## AI usage 
