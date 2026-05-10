@@ -9,7 +9,9 @@ import sqlite3
 from create_database import create_database
 
 # set directory paths 
+# get full path: https://www.geeksforgeeks.org/python/python-os-path-abspath-method-with-example/
 project_dir = os.path.dirname(os.path.abspath(__file__))
+# create dir: https://www.geeksforgeeks.org/python/python-os-path-join-method/
 data_dir = os.path.join(project_dir, "data")
 anonymized_data = os.path.join(data_dir, "db_anonymised.csv")
 db_path = os.path.join(data_dir, "slackline.db")
