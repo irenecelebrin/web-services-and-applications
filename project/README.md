@@ -6,7 +6,7 @@ The project is a REST API and web application created for the admins of the spor
 
 ## The project: Slackline Ireland memberships 
 
-In my daily worklife I have access and use LLMs and AI agents extensively. However, for security reasons, it wasn't possible for me to use any of my work projects for this course. So I decided to take inspiratipn from  my hobbies and created an application to manage the members of the Slackline community in Dublin. 
+In my daily worklife I have access and use LLMs and AI agents extensively. However, for security reasons, it wasn't possible for me to use any of my work projects for this course. So I decided to take inspiration from  my hobbies, and created an application to manage the members of the Slackline community in Dublin. 
 
 What is slackline? Basically, it's about walking on a loose rope (or slackline). You can do it in the park, in the forest, in the mountains. 
 Slackline Ireland is an informal, self-regulated organization. We meet up in the park, go on adventures around Ireland, share knowledge and best practices, and above all have fun wiggling above the ground. 
@@ -19,7 +19,23 @@ Joining the group and being a member is free, but we want to keep track of regul
 
 ## Getting started 
 
-Programming languages used:
+The repo is organized as follows: 
+
+    project/                       
+    ├── server.py                   Flask app with routes 
+    ├── create_database.py          Create SQLite dabatase and tables
+    ├── import_data.py              Parse data from .csv to db
+    ├── person_dao.py               Connect to db and perform CRUD operations 
+    ├── requirements.txt            
+    ├── README.md
+    ├── FE/                         Front End
+    │   ├── gallery/                images for the web app
+    │   ├── static/                 CSS file
+    │   └── templates/              HTML templated for the web app  
+    └── data/                       Database files and schemas
+
+
+Programming languages used for this project:
 
 - SQL (the database)
 - Python (for back end)
@@ -71,7 +87,7 @@ The code required to run the Flask App was imported to [eu.pythonanywhere.com](e
 The application is available at [https://celebrin.eu.pythonanywhere.com/](https://celebrin.eu.pythonanywhere.com/). 
 
 
-It is also possible to make curl requests to the hosted application using the same format displayed above and replacing the url. 
+It is also possible to make curl requests to the hosted application using the same format displayed above and replacing the url with [https://celebrin.eu.pythonanywhere.com/](https://celebrin.eu.pythonanywhere.com/). 
 
 
 
@@ -81,7 +97,7 @@ It is also possible to make curl requests to the hosted application using the sa
 
 **Database creation**  
 
-The database is created parsing the data from the existing csv [db_anonymised.csv](project/data/db_anonymised.csv) and importing it into a relational database using SQLite: [slackline.db](data/slackline.db). The real data from Slackline Ireland was anonymised to respect the privacy of its members. 
+The database was created parsing the data from the existing csv [db_anonymised.csv](project/data/db_anonymised.csv) and importing it into a relational database using SQLite: [slackline.db](data/slackline.db). The real data from Slackline Ireland was anonymised to respect the privacy of its members. 
 
 *Why SQLite?* It was chosen because the amount of data to handle was not significant, and for its portability (no installation required, ready-to-use in all operating systems, once Python is installed, and easy to host). 
 
@@ -89,7 +105,7 @@ The script used to parse the data is [import_data.py](import_data.py).
 
 **Database structure**
 
-The database is created using the script [create_database.py](create_database.py). The program defines 3 tables: 
+The SQLite database was created using the script [create_database.py](create_database.py). The program defines 3 tables: 
 
 - **People**: the main table with the list of members, contacts and addresses. It includes 1 foreign key linking to the table *emergency contacts*. 
 
@@ -101,7 +117,7 @@ The database is created using the script [create_database.py](create_database.py
 <img src="data/schema_contacts.png" alt="Emergency contacts" width="600">
 <br><br>
 
-- **Memberships**: it includes data like registration dates and payments (note: paying a contribution is not required, any member can choose to do it to fund the organization and access extra activities). A foreign key is used to reference the table *peeople*. 
+- **Memberships**: it includes data like registration dates and payments (note: paying a contribution is not required, any member can choose to do it to fund the organization and access extra activities). A foreign key is used to reference the table *people*. 
 
 <img src="data/schema_memberships.png" alt="Memberships" width="600">
 <br><br>
@@ -128,11 +144,15 @@ Each route serves two purposes in delivering content: browser requests receive t
 | `/` | n/a |  Static index |
 | `/gallery/<path:filename>` |  n/a |   Gallery |
 
-**Required fields for creation (POST /form):** `name`, `last_name`, `phone`, `email`, `emergency_contact_name`, `emergency_contact_phone`.
+About the routes: 
 
-All write operations return 404 if the member is not found. DELETE returns `{"deleted": id}` on success; deleting a member results in deleting all the member details across the database (this is implemented in the code, not in the database). 
+- Required fields for creation (POST /form): `name`, `last_name`, `phone`, `email`, `emergency_contact_name`, `emergency_contact_phone`
 
-The **person DAO** includes the functions to connect to the database and perform the CRUD operations mapped in the Flask APP. 
+- All write operations return 404 if the member is not found. 
+
+- DELETE returns `{"deleted": id}` on success; deleting a member results in deleting all the member details across the database (this is implemented in the code, not in the database). 
+
+Finally, [person_dao.py](person_dao.py) connects to the database and performs the CRUD operations mapped in the Flask App. 
 
 ### 3. Front End 
 
@@ -172,5 +192,4 @@ This still required significant prompting to follow the design I had in mind and
 - Front End: The colors, images and view options and search functionalities.  
 
 
-
-
+## End
